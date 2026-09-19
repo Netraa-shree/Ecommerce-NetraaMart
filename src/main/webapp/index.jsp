@@ -13,6 +13,7 @@
     <a href="${pageContext.request.contextPath}/" class="brand">NetraaMart</a>
     <nav>
         <a href="${pageContext.request.contextPath}/products">Browse</a>
+        <a href="${pageContext.request.contextPath}/chat">Assistant</a>
         <c:choose>
             <c:when test="${not empty sessionScope.user}">
                 <c:if test="${sessionScope.user.seller || sessionScope.user.admin}">
@@ -41,6 +42,7 @@
         </p>
         <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
             <a href="${pageContext.request.contextPath}/products" class="btn btn-primary">Browse Products</a>
+            <a href="${pageContext.request.contextPath}/chat" class="btn btn-outline">Ask Assistant</a>
             <c:if test="${empty sessionScope.user}">
                 <a href="${pageContext.request.contextPath}/register" class="btn btn-outline">Become a Seller</a>
             </c:if>
@@ -58,6 +60,7 @@
             <li>✓ F6 – Order history (buyer) & incoming orders (seller)</li>
             <li>✓ F7 – Admin panel (users, products, orders)</li>
             <li>✓ F8 – Product reviews & star ratings</li>
+            <li>✓ O4 – AI chatbot (mock FAQ assistant)</li>
         </ul>
         <p style="margin-top:1rem; font-size:0.9rem;">
             Health check: <a href="${pageContext.request.contextPath}/api/v1/health" target="_blank">/api/v1/health</a>
