@@ -12,14 +12,14 @@ import java.util.Set;
 
 /**
  * Protects routes that require login.
- * Public: /, /login, /register, /products, /product, /css, /js, /api/health
+ * Public: /, /login, /register, /products, /product, /chat, /css, /js, /api/health
  */
 @WebFilter("/*")
 public class AuthFilter implements Filter {
 
     private static final Set<String> PUBLIC_PREFIXES = Set.of(
             "/login", "/register", "/css/", "/js/", "/images/",
-            "/api/health", "/favicon"
+            "/api/health", "/api/v1/health", "/favicon", "/chat"
     );
 
     private static final Set<String> PUBLIC_EXACT = Set.of(
@@ -35,7 +35,6 @@ public class AuthFilter implements Filter {
 
         String path = req.getRequestURI().substring(req.getContextPath().length());
 
-        // Allow public paths
         if (isPublic(path)) {
             chain.doFilter(request, response);
             return;
@@ -45,12 +44,10 @@ public class AuthFilter implements Filter {
         User user = (session != null) ? (User) session.getAttribute("user") : null;
 
         if (user == null) {
-            // Not logged in → redirect to login
             res.sendRedirect(req.getContextPath() + "/login");
             return;
         }
 
-        // Role-based checks for specific areas
         if (path.startsWith("/seller") && !user.isSeller() && !user.isAdmin()) {
             res.sendError(HttpServletResponse.SC_FORBIDDEN, "Seller access required");
             return;
@@ -68,7 +65,6 @@ public class AuthFilter implements Filter {
         for (String prefix : PUBLIC_PREFIXES) {
             if (path.startsWith(prefix)) return true;
         }
-        // Allow product details: /product?id=...
         if (path.startsWith("/product")) return true;
         return false;
     }
