@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Register – NetraaMart</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="nav">
+    <a class="brand" href="index.html">Netraa<span>Mart</span></a>
+    <div class="nav-links">
+      <a href="index.html">Products</a>
+      <a href="cart.html">Cart <span class="badge" id="cartCount">0</span></a>
+      <a href="login.html">Login</a>
+      <a href="register.html">Register</a>
+    </div>
+  </header>
+  <div class="wrap" style="max-width:420px;">
+    <div class="card">
+      <h1 style="margin-bottom:0.5rem;">Create account</h1>
+      <p style="color:#565959;margin-bottom:1rem;font-size:0.9rem;">Demo only — no server.</p>
+      <div id="msg"></div>
+      <form onsubmit="return doReg(event)">
+        <div class="form-group">
+          <label>Full name</label>
+          <input type="text" id="name" required />
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="email" required />
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" id="password" required minlength="4" />
+        </div>
+        <div class="form-group">
+          <label>I want to</label>
+          <select id="role">
+            <option value="BUYER">Buy products</option>
+            <option value="SELLER">Sell products</option>
+          </select>
+        </div>
+        <button class="btn" type="submit" style="width:100%;">Create account</button>
+      </form>
+      <p style="margin-top:1rem;font-size:0.9rem;">Already have an account? <a href="login.html">Sign in</a></p>
+    </div>
+  </div>
+  <footer class="footer">NetraaMart &copy; 2026</footer>
+  <script src="cart.js"></script>
+  <script>
+    function doReg(e) {
+      e.preventDefault();
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const role = document.getElementById("role").value;
+      localStorage.setItem("nm_user", email);
+      localStorage.setItem("nm_name", name);
+      localStorage.setItem("nm_role", role);
+      document.getElementById("msg").innerHTML = '<div class="alert">Welcome, <strong>' + name + '</strong> (' + role + ') — demo account saved in browser.</div>';
+      return false;
+    }
+  </script>
+</body>
+</html>
