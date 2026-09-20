@@ -1,4 +1,11 @@
 # NetraaMart
+**Repository:** https://github.com/Netraa-shree/Ecommerce-NetraaMart  
+
+**Checkpoint:** Full Build + Deploy – 21 September 2026  
+
+**Live URL:** _Pending (see DEPLOY.md)_  
+
+**Demo video:** _Pending (see VIDEO_SCRIPT.md)_  
 
 E-commerce Marketplace (Buyer / Seller / Admin) built with Java Servlet + JSP + H2.
 
