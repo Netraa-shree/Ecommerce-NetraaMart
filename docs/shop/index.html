@@ -3,187 +3,61 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>NetraaMart – Online Marketplace</title>
-  <style>
-    :root {
-      --nav: #131921;
-      --nav2: #232f3e;
-      --accent: #febd69;
-      --accent2: #f3a847;
-      --bg: #eaeded;
-      --card: #fff;
-      --text: #0f1111;
-      --muted: #565959;
-      --link: #007185;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: "Amazon Ember", Arial, sans-serif; background: var(--bg); color: var(--text); }
-    a { color: var(--link); text-decoration: none; }
-    a:hover { text-decoration: underline; color: #c7511f; }
-
-    /* Top nav */
-    .nav {
-      background: var(--nav); color: #fff; display: flex; flex-wrap: wrap;
-      align-items: center; gap: 0.75rem; padding: 0.6rem 1rem;
-    }
-    .brand { font-size: 1.35rem; font-weight: 700; color: #fff !important; text-decoration: none !important; }
-    .brand span { color: var(--accent); }
-    .search {
-      flex: 1; min-width: 180px; display: flex; max-width: 640px;
-    }
-    .search input {
-      flex: 1; border: none; padding: 0.65rem 0.75rem; border-radius: 4px 0 0 4px; font-size: 0.95rem;
-    }
-    .search button {
-      background: var(--accent); border: none; padding: 0 1rem; border-radius: 0 4px 4px 0;
-      font-weight: 600; cursor: pointer;
-    }
-    .search button:hover { background: var(--accent2); }
-    .nav-links { display: flex; gap: 1rem; font-size: 0.85rem; align-items: center; }
-    .nav-links a { color: #fff !important; text-decoration: none !important; }
-    .nav-links a:hover { color: var(--accent) !important; }
-
-    .subnav {
-      background: var(--nav2); color: #fff; padding: 0.45rem 1rem;
-      display: flex; gap: 1.25rem; font-size: 0.9rem; flex-wrap: wrap;
-    }
-    .subnav a { color: #fff !important; text-decoration: none !important; }
-    .subnav a:hover { text-decoration: underline !important; }
-
-    .banner {
-      background: linear-gradient(90deg, #232f3e, #37475a);
-      color: #fff; text-align: center; padding: 1.75rem 1rem; margin-bottom: 1rem;
-    }
-    .banner h1 { font-size: 1.6rem; margin-bottom: 0.35rem; }
-    .banner p { opacity: 0.9; font-size: 0.95rem; }
-
-    .wrap { max-width: 1200px; margin: 0 auto; padding: 0 1rem 2rem; }
-
-    .section-title {
-      font-size: 1.25rem; margin: 1rem 0 0.75rem; font-weight: 700;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 1rem;
-    }
-    .card {
-      background: var(--card); border-radius: 8px; padding: 1rem;
-      box-shadow: 0 1px 2px rgb(0 0 0 / 0.08);
-      display: flex; flex-direction: column; gap: 0.4rem;
-    }
-    .card .img {
-      height: 160px; background: #f7f7f7; border-radius: 6px;
-      display: flex; align-items: center; justify-content: center;
-      color: var(--muted); font-size: 0.85rem;
-    }
-    .card .name { font-weight: 600; font-size: 0.95rem; line-height: 1.35; min-height: 2.5em; }
-    .card .stars { color: #ffa41c; font-size: 0.9rem; }
-    .card .price { font-size: 1.2rem; font-weight: 700; }
-    .card .price small { font-size: 0.75rem; font-weight: 600; vertical-align: super; }
-    .card .meta { font-size: 0.8rem; color: var(--muted); }
-    .btn {
-      margin-top: auto; background: var(--accent); border: none; border-radius: 20px;
-      padding: 0.5rem 0.75rem; font-weight: 600; cursor: pointer; width: 100%;
-    }
-    .btn:hover { background: var(--accent2); }
-
-    .note {
-      background: #fff; border-left: 4px solid var(--accent2);
-      padding: 1rem; margin: 1.5rem 0; border-radius: 4px; font-size: 0.9rem; line-height: 1.5;
-    }
-    .footer {
-      background: var(--nav2); color: #ddd; text-align: center;
-      padding: 1.5rem; font-size: 0.85rem; margin-top: 2rem;
-    }
-    .footer a { color: #febd69 !important; }
-  </style>
+  <title>NetraaMart – Shop</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header class="nav">
-    <a class="brand" href="#">Netraa<span>Mart</span></a>
+    <a class="brand" href="index.html">Netraa<span>Mart</span></a>
     <div class="search">
-      <input type="search" id="q" placeholder="Search products..." />
+      <input type="search" id="q" placeholder="Search NetraaMart..." />
       <button type="button" onclick="filterProducts()">Search</button>
     </div>
     <div class="nav-links">
-      <a href="#products">Products</a>
-      <a href="#about">About</a>
-      <a href="https://github.com/Netraa-shree/Ecommerce-NetraaMart">GitHub</a>
+      <a href="index.html">Products</a>
+      <a href="cart.html">Cart <span class="badge" id="cartCount">0</span></a>
+      <a href="login.html">Login</a>
+      <a href="register.html">Register</a>
+      <a href="about.html">About</a>
     </div>
   </header>
   <div class="subnav">
-    <a href="#products">All</a>
-    <a href="#products" onclick="filterCat('Electronics')">Electronics</a>
-    <a href="#products" onclick="filterCat('Clothing')">Clothing</a>
-    <a href="#products" onclick="filterCat('Books')">Books</a>
-    <a href="#products" onclick="filterCat('Home')">Home</a>
+    <a href="#" onclick="filterCat('all');return false;">All</a>
+    <a href="#" onclick="filterCat('Electronics');return false;">Electronics</a>
+    <a href="#" onclick="filterCat('Clothing');return false;">Clothing</a>
+    <a href="#" onclick="filterCat('Books');return false;">Books</a>
+    <a href="#" onclick="filterCat('Home');return false;">Home</a>
   </div>
-
   <div class="banner">
     <h1>Welcome to NetraaMart</h1>
-    <p>Multi-role marketplace · Buy · Sell · Admin · AI Assistant</p>
+    <p>Browse products · Add to cart · Demo shopping website</p>
   </div>
-
   <div class="wrap">
-    <div class="note" id="about">
-      <strong>Project demo UI (GitHub Pages).</strong>
-      Full Java app (login, cart, checkout, orders, admin, chatbot) lives in the
-      <a href="https://github.com/Netraa-shree/Ecommerce-NetraaMart">source repository</a>
-      and runs on Tomcat. This page is a visual storefront preview for evaluation.
-    </div>
-
-    <h2 class="section-title" id="products">Featured products</h2>
+    <h2 style="margin-bottom:0.75rem;">Featured products</h2>
     <div class="grid" id="grid"></div>
   </div>
-
-  <footer class="footer">
-    NetraaMart &copy; 2026 · Coursework Full Build ·
-    <a href="https://github.com/Netraa-shree/Ecommerce-NetraaMart">Source on GitHub</a>
-  </footer>
-
+  <footer class="footer">NetraaMart &copy; 2026 · <a href="https://github.com/Netraa-shree/Ecommerce-NetraaMart">GitHub</a></footer>
+  <script src="cart.js"></script>
   <script>
-    const products = [
-      { name: "Wireless Bluetooth Headphones", cat: "Electronics", price: 1499, stars: 4.5, stock: 25 },
-      { name: "Cotton T-Shirt (Unisex)", cat: "Clothing", price: 399, stars: 4.2, stock: 50 },
-      { name: "Java Programming Book", cat: "Books", price: 599, stars: 4.8, stock: 15 },
-      { name: "Stainless Steel Water Bottle", cat: "Home", price: 799, stars: 4.3, stock: 40 },
-      { name: "USB-C Fast Charger 65W", cat: "Electronics", price: 1299, stars: 4.6, stock: 30 },
-      { name: "Desk Organizer Set", cat: "Home", price: 449, stars: 4.0, stock: 20 },
-      { name: "Running Sports Shoes", cat: "Clothing", price: 2199, stars: 4.4, stock: 12 },
-      { name: "Web Development Handbook", cat: "Books", price: 699, stars: 4.7, stock: 18 }
-    ];
-
-    function stars(n) {
-      const full = Math.floor(n);
-      return "★".repeat(full) + (n % 1 >= 0.5 ? "½" : "") + "☆".repeat(5 - full - (n % 1 >= 0.5 ? 1 : 0)) + " " + n;
-    }
-
     function render(list) {
-      const grid = document.getElementById("grid");
-      grid.innerHTML = list.map(p => `
-        <article class="card" data-cat="${p.cat}" data-name="${p.name.toLowerCase()}">
+      document.getElementById("grid").innerHTML = list.map(p => `
+        <article class="product-card">
           <div class="img">${p.cat}</div>
           <div class="name">${p.name}</div>
           <div class="stars">${stars(p.stars)}</div>
-          <div class="price"><small>₹</small>${p.price.toLocaleString("en-IN")}</div>
-          <div class="meta">${p.stock} in stock · ${p.cat}</div>
-          <button class="btn" type="button" onclick="alert('Full cart/checkout runs on the Java Tomcat app. See GitHub source.')">Add to Cart</button>
-        </article>
-      `).join("");
+          <div class="price">₹${p.price.toLocaleString("en-IN")}</div>
+          <div style="font-size:0.8rem;color:#565959;">${p.stock} in stock</div>
+          <button class="btn" style="margin-top:auto;width:100%;" onclick="addToCart(${p.id})">Add to Cart</button>
+        </article>`).join("");
     }
-
     function filterProducts() {
       const q = document.getElementById("q").value.toLowerCase().trim();
-      render(products.filter(p => !q || p.name.toLowerCase().includes(q) || p.cat.toLowerCase().includes(q)));
+      render(PRODUCTS.filter(p => !q || p.name.toLowerCase().includes(q) || p.cat.toLowerCase().includes(q)));
     }
     function filterCat(cat) {
-      render(products.filter(p => p.cat === cat));
-      return false;
+      render(cat === "all" ? PRODUCTS : PRODUCTS.filter(p => p.cat === cat));
     }
-
-    render(products);
+    render(PRODUCTS);
     document.getElementById("q").addEventListener("keydown", e => { if (e.key === "Enter") filterProducts(); });
   </script>
 </body>
