@@ -1,7 +1,5 @@
 # Contributing – NetraaMart
 
-This is a coursework project (Full Build checkpoint).
-
 ## Structure
 
 - `src/main/java` – servlets, DAOs, filters, chat
