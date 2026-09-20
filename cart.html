@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cart – NetraaMart</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="nav">
+    <a class="brand" href="index.html">Netraa<span>Mart</span></a>
+    <div class="nav-links">
+      <a href="index.html">Products</a>
+      <a href="cart.html">Cart <span class="badge" id="cartCount">0</span></a>
+      <a href="login.html">Login</a>
+      <a href="about.html">About</a>
+    </div>
+  </header>
+  <div class="wrap">
+    <h1 style="margin-bottom:1rem;">Your Cart</h1>
+    <div class="card">
+      <div id="empty" style="display:none;text-align:center;padding:2rem;color:#565959;">
+        <p>Your cart is empty.</p>
+        <p style="margin-top:1rem;"><a class="btn" href="index.html">Continue shopping</a></p>
+      </div>
+      <div id="filled">
+        <table class="table">
+          <thead><tr><th>Product</th><th>Price</th><th>Qty</th><th>Subtotal</th><th></th></tr></thead>
+          <tbody id="rows"></tbody>
+        </table>
+        <p style="text-align:right;font-size:1.25rem;font-weight:700;margin:1rem 0;" id="total"></p>
+        <div style="text-align:right;">
+          <a class="btn btn-outline" href="index.html">Continue shopping</a>
+          <button class="btn btn-dark" type="button" onclick="checkout()">Proceed to checkout</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="footer">NetraaMart &copy; 2026</footer>
+  <script src="cart.js"></script>
+  <script>
+    function renderCart() {
+      const cart = getCart();
+      if (!cart.length) {
+        document.getElementById("empty").style.display = "block";
+        document.getElementById("filled").style.display = "none";
+        return;
+      }
+      document.getElementById("empty").style.display = "none";
+      document.getElementById("filled").style.display = "block";
+      document.getElementById("rows").innerHTML = cart.map(x => {
+        const p = PRODUCTS.find(p => p.id === x.id);
+        if (!p) return "";
+        const sub = p.price * x.qty;
+        return `<tr>
+          <td>${p.name}</td>
+          <td>₹${p.price}</td>
+          <td><input type="number" min="1" value="${x.qty}" style="width:60px" onchange="setQty(${p.id}, this.value)"></td>
+          <td>₹${sub}</td>
+          <td><button class="btn btn-outline" type="button" onclick="removeItem(${p.id})">Remove</button></td>
+        </tr>`;
+      }).join("");
+      document.getElementById("total").textContent = "Total: ₹" + cartTotal().toLocaleString("en-IN");
+    }
+    function setQty(id, q) {
+      q = parseInt(q, 10) || 1;
+      const cart = getCart().map(x => x.id === id ? { id, qty: q } : x);
+      saveCart(cart); renderCart();
+    }
+    function removeItem(id) {
+      saveCart(getCart().filter(x => x.id !== id)); renderCart();
+    }
+    function checkout() {
+      if (!getCart().length) return;
+      alert("Order placed (demo)! Total ₹" + cartTotal().toLocaleString("en-IN") + "\n\nThis is a website demo — no real payment.");
+      saveCart([]);
+      renderCart();
+    }
+    renderCart();
+  </script>
+</body>
+</html>
